@@ -15,6 +15,5 @@ SessionLocal = sessionmaker(autocommit=False,
                             autoflush=False, 
                             bind = engine)
 
-Base = declarative_base()   ## Base is an object of database
-                            ## which will be used for interaction
-                            ## with tables in the database
+Base = declarative_base()   ## declarative_base returns a class
+                            ## so Base is a class
