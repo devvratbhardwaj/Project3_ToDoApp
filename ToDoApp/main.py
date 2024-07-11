@@ -48,7 +48,7 @@ async def add_item(db: db_dependency, item:ToDoRequest):
     db.commit()
 
 @app.put("/update/{id}", status_code=status.HTTP_204_NO_CONTENT)
-async def update_item(db:db_dependency, id:int, item:ToDoRequest):
+async def update_item(db:db_dependency, item:ToDoRequest, id:int = Path(gt=0)):
     
     todo_model = db.query(ToDos).filter(ToDos.id == id).first()
 
@@ -63,5 +63,11 @@ async def update_item(db:db_dependency, id:int, item:ToDoRequest):
     db.add(todo_model)
     db.commit()
 
-
+@app.delete("/todo/{id}", status_code=status.HTTP_204_NO_CONTENT)
+async def delete_from_db(db:db_dependency, id:int = Path(gt=0)):
+    todo_model = db.query(ToDos).filter(ToDos.id == id).first()
+    if todo_model is None:
+        raise HTTPException(status_code=404,detail="Not Found")
+    db.query(ToDos).filter(ToDos.id==id).delete()
+    db.commit()
     

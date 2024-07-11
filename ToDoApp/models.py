@@ -1,6 +1,6 @@
 ## SQLAlchemy uses the term "model" to refer to these classes and instances that interact with the database.
 from database import Base
-from sqlalchemy import Column, column, Integer
+from sqlalchemy import Column, Integer
 from sqlalchemy import String, Boolean
 
 class ToDos(Base):
